@@ -40,8 +40,7 @@ std::unordered_set<std::string> get_applicants(std::string filename) {
     return applicants;
   }
   std::string name;
-  while(ifs.is_open()) {
-    getline(ifs, name);
+  while(std::getline(ifs, name)) {
     applicants.insert(name);
   }
   return applicants;
