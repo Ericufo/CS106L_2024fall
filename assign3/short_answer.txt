@@ -5,7 +5,12 @@ Make a Class
 ------------
 
 Q1. What’s const-correctness and why is it important?
-A1. TODO
+A1.  Const-correctness ensures that variables, methods, 
+and parameters not meant to be modified are protected from changes. 
+It improves code safety, readability, optimization, and compatibility by enforcing immutability where needed.
 
 Q2. Is your class const-correct? How do you know?
-A2. TODO
+A2.  Yes, the class is const-correct. 
+Methods like getName, getCost, getAttack, and printInfo are marked as const, 
+ensuring they do not modify the object. 
+Non-const methods like addTrait appropriately modify the internal state as intended.
