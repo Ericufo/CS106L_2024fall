@@ -51,8 +51,13 @@ template <typename T> struct ListNode {
  * @return A `unique_ptr` to the head of the list.
  */
 template <typename T> unique_ptr<ListNode<T>> create_list(const std::vector<T>& values) {
-  /* STUDENT TODO: Implement this method */
-  throw std::runtime_error("Not implemented: createList");
+  unique_ptr<ListNode<T>> head = nullptr;
+  for (auto it = values.end() - 1; it >= values.begin(); --it) {
+    unique_ptr<ListNode<T>> node = make_unique<ListNode<T>>(*it);
+    node->next = std::move(head);
+    head = std::move(node);
+  }
+  return head;
 }
 
 /**

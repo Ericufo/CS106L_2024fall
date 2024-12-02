@@ -8,7 +8,7 @@
 #include <type_traits>
 #include <vector>
 
-/** STUDENT_TODO: You will need to include a relevant header file here! */
+#include <optional>
 
 #include "autograder/utils.hpp"
 
@@ -52,11 +52,14 @@ public:
    * @param course_title The title of the course to find.
    * @return You will need to figure this out!
    */
-  FillMeIn find_course(std::string course_title)
+  std::optional<Course> find_course(std::string course_title)
   {
-    /* STUDENT_TODO: Implement this method! You will need to change the return
-     * type. */
-    throw std::runtime_error("find_course not implemented");
+    for(auto course : courses) {
+      if(course.title == course_title) {
+        return course;
+      }
+    }
+    return std::nullopt;
   }
 
 private:
@@ -77,12 +80,11 @@ main(int argc, char* argv[])
     CourseDatabase db("autograder/courses.csv");
     auto course = db.find_course(argv[1]);
 
-    /* STUDENT_TODO: Change this condition. How can you check if the database
-     * has the desired course? */
-    if (false) {
+    if(course.has_value()) {
       std::cout << "Found course: " << course->title << ","
                 << course->number_of_units << "," << course->quarter << "\n";
-    } else {
+    }
+    else {
       std::cout << "Course not found.\n";
     }
 

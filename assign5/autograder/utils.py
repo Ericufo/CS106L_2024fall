@@ -118,43 +118,7 @@ init()
 # ==============================================================================
 
 
-def check_for_updates():
-    import subprocess
 
-    def needs_update() -> bool:
-        try:
-            subprocess.check_call(
-                ["git", "rev-parse", "--is-inside-work-tree"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-            subprocess.check_call(
-                ["git", "fetch", "origin"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-
-            origin_main_commit = subprocess.check_output(
-                ["git", "rev-parse", "origin/main"]
-            ).strip()
-            result = subprocess.run(
-                ["git", "merge-base", "--is-ancestor", origin_main_commit, "HEAD"]
-            )
-            return result.returncode != 0
-
-        except subprocess.CalledProcessError:
-            return False
-
-    if needs_update():
-        tab = f"{Back.YELLOW} {Back.RESET} "
-        print(
-            f"\n{tab}It looks like your assignment might be out of date. Try running:"
-            f"\n{tab}\n{tab}\tgit pull origin main"
-            f"\n{tab}\n{tab}to fetch any updates, and then re-run your code.\n"
-        )
-
-
-check_for_updates()
 
 
 # ==============================================================================
